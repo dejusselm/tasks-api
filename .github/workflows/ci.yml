@@ -12,6 +12,12 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           cache: pip
+      - uses: actions/upload-artifacts@v7
+        with:
+          name: coverage-report
+          path: coverage.xml
+        if: matrix.python-version == '3.12'
+          --cov-report=term-xml
 
       - run: pip install -r requirements-dev.txt
       - run: pytest --cov=app --cov-report=term-missing --cov-fail-under=80
