@@ -9,4 +9,9 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -r requirements-dev.txt
-      - run: pytest
+      - run: pytest --cov=app --cov-report=term-missing --cov-fail-under=80
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - run: flake8 .
+      - run: black --check .
