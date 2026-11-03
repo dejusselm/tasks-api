@@ -8,19 +8,23 @@ jobs:
         python-version: ["3.11", "3.12", "3.13"]
     steps:
       - uses: actions/checkout@v6
+
       - uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python-version }}
           cache: pip
-      - uses: actions/upload-artifacts@v7
+          cache-dependency-path: requirements-dev.txt
+
+      - run: pip install -r requirements-dev.txt
+
+      - run: pytest --cov=app --cov-report=term-xml --cov-report=term-missing --cov-fail-under=80
+
+      - uses: actions/upload-artifact@v7
         with:
           name: coverage-report
           path: coverage.xml
-        if: matrix.python-version == '3.12'
-          --cov-report=term-xml
+        if: matrix.python-version == "3.12"
 
-      - run: pip install -r requirements-dev.txt
-      - run: pytest --cov=app --cov-report=term-missing --cov-fail-under=80
   lint:
     runs-on: ubuntu-latest
     steps:
