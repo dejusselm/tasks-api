@@ -75,13 +75,7 @@ jobs:
 
       - run: |
           REPO_OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
-
-          if [[ "${{ github.ref }}" == refs/tags/v* ]]; then
-            TAG="${{ github.ref_name }}"
-          else
-            TAG="sha-${GITHUB_SHA::7}"
-          fi
-
+          TAG="sha-${GITHUB_SHA::7}"
           IMAGE="ghcr.io/${REPO_OWNER}/${{ github.event.repository.name }}:${TAG}"
 
           docker pull $IMAGE
@@ -112,11 +106,7 @@ jobs:
 
       - run: |
           REPO_OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
-          if [[ "${{ github.ref }}" == refs/tags/v* ]]; then
-            TAG="${{ github.ref_name }}"
-          else
-            TAG="sha-${GITHUB_SHA::7}"
-          fi
+          TAG="sha-${GITHUB_SHA::7}"
           IMAGE="ghcr.io/${REPO_OWNER}/${{ github.event.repository.name }}:${TAG}"
 
           docker pull $IMAGE
