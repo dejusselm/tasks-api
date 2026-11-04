@@ -46,7 +46,7 @@ jobs:
 
       - uses: docker/metadata-action@v6
         with:
-          images: ghcr.io/${{ env.REPO_OWNER }}/${{ github.repository }}
+          images: ghcr.io/${{ env.REPO_OWNER }}/${{ github.event.repository.name }}
           tags: |
             type=sha,format=short
             type=semver,pattern={{version}}
