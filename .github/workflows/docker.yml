@@ -82,6 +82,7 @@ jobs:
           fi
           IMAGE="ghcr.io/${REPO_OWNER}/${{ github.event.repository.name }}:${TAG}"
 
+          echo "Pulling and running: $IMAGE"
           docker pull $IMAGE
           docker run -d --name tasks-api-staging -p 8000:8000 $IMAGE
 
@@ -117,6 +118,7 @@ jobs:
           fi
           IMAGE="ghcr.io/${REPO_OWNER}/${{ github.event.repository.name }}:${TAG}"
 
+          echo "Pulling and running: $IMAGE"
           docker pull $IMAGE
           docker run -d --name tasks-api-prod -p 8000:8000 $IMAGE
 
