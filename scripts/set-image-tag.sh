@@ -8,12 +8,12 @@ file="${1:?usage: set-image-tag.sh <fichier> <version>}"
 version="${2:?usage: set-image-tag.sh <fichier> <version>}"
 
 if ! [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-  echo "Version invalide : '$version' (attendu : 1.2.3)" >&2
-  exit 1
+    echo "Version invalide : '$version' (attendu : 1.2.3)" >&2
+    exit 1
 fi
 if [ ! -f "$file" ]; then
-  echo "Fichier introuvable : $file" >&2
-  exit 1
+    echo "Fichier introuvable : $file" >&2
+    exit 1
 fi
 
 sed -i.bak -E "s|(image: ghcr\.io/[^:]+/tasks-api:).*|\1${version}|" "$file"
